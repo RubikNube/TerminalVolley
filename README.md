@@ -22,7 +22,7 @@ A simple volleyball game playable in the terminal, inspired by **Blobby Volley**
 
 ## Planned features
 
-- [ ] Basic terminal renderer (grid-based)
+- [x] Basic terminal renderer (grid-based)
 - [ ] Game loop with fixed timestep
 - [ ] Player movement + jumping
 - [ ] Ball physics + collisions (ground/walls/net/players)
@@ -34,7 +34,7 @@ A simple volleyball game playable in the terminal, inspired by **Blobby Volley**
 ### Run (once implemented)
 
 ```bash
-go run ./cmd/terminalvolley
+go run ./cmd/terminalvolley/main.go
 ```
 
 ### Build
