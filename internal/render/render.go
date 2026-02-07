@@ -48,7 +48,7 @@ func (r *Renderer) Draw(f *Frame) error {
 		)
 	}
 
-	// Clear once to start from a clean screen, then just move cursor home.
+	// Clear once, then redraw from home to avoid flicker.
 	if !r.clearedOnce {
 		if _, err := fmt.Fprint(r.bw, "\x1b[2J"); err != nil {
 			return err
@@ -59,14 +59,14 @@ func (r *Renderer) Draw(f *Frame) error {
 		return err
 	}
 
-	// Write frame content. Avoid newline after last row to prevent scrolling.
 	for y := 0; y < r.height; y++ {
 		row := f.Cells[y*r.width : (y+1)*r.width]
 		if _, err := r.bw.Write(row); err != nil {
 			return err
 		}
+		// IMPORTANT: force carriage return so next row starts at column 1.
 		if y != r.height-1 {
-			if _, err := r.bw.WriteString("\n"); err != nil {
+			if _, err := r.bw.WriteString("\r\n"); err != nil {
 				return err
 			}
 		}

@@ -1,6 +1,7 @@
 # TerminalVolley
 
-A simple volleyball game playable in the terminal, inspired by **Blobby Volley**.
+A simple volleyball game playable in the terminal, inspired by **Blobby
+Volley**.
 
 ## Goals
 
@@ -9,7 +10,7 @@ A simple volleyball game playable in the terminal, inspired by **Blobby Volley**
 - Net in the middle, scoring when the ball hits the ground
 - Cross-platform terminal rendering (Linux/macOS/Windows via terminal library)
 
-## Controls (planned defaults)
+## Controls (current defaults)
 
 - Player 1 (left): `A/D` move, `W` jump
 - Player 2 (right): `J/L` move, `I` jump
@@ -18,20 +19,22 @@ A simple volleyball game playable in the terminal, inspired by **Blobby Volley**
 ## Tech
 
 - Language: Go
-- Terminal rendering/input: `tcell` or `termbox-go` (to be chosen)
+- Rendering: custom fixed-size ANSI grid renderer
+- Input (Linux): raw mode via `golang.org/x/sys/unix`
 
-## Planned features
+## Status
 
 - [x] Basic terminal renderer (grid-based)
-- [ ] Game loop with fixed timestep
-- [ ] Player movement + jumping
+- [x] Simple game loop (~30 FPS)
+- [x] Player movement + jumping (keyboard)
 - [ ] Ball physics + collisions (ground/walls/net/players)
 - [ ] Scoring + round reset/serve
 - [ ] Simple UI (scoreboard)
+- [ ] Cross-platform input (macOS/Windows)
 
 ## Development
 
-### Run (once implemented)
+### Run
 
 ```bash
 go run ./cmd/terminalvolley/main.go
@@ -46,4 +49,5 @@ go build -o terminalvolley ./cmd/terminalvolley
 
 ## Notes
 
-This project is intentionally lightweight and focuses on fun gameplay rather than realistic simulation.
+This project is intentionally lightweight and focuses on fun gameplay rather
+than realistic simulation.
