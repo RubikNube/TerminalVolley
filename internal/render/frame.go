@@ -2,6 +2,11 @@
 // fixed-size character grid.
 package render
 
+const (
+	BlobWidth  = 3
+	BlobHeight = 2
+)
+
 // Frame is a fixed-size 2D grid stored as a flat byte slice (row-major).
 // Cells must contain exactly Width*Height bytes.
 type Frame struct {
@@ -59,5 +64,6 @@ func (f *Frame) DrawBlob(x, y int) {
 }
 
 func (f *Frame) DrawBall(x, y int) {
+	// 1x1 ball sprite at (x, y)
 	f.Set(x, y, '*')
 }
