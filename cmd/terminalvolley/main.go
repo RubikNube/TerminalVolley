@@ -9,6 +9,7 @@ import (
 	"syscall"
 	"time"
 
+	"terminalvolley/config"
 	"terminalvolley/internal/input"
 	"terminalvolley/internal/render"
 )
@@ -52,6 +53,12 @@ func main() {
 
 		groundY = h - 2 // blob "feet" y (since ground is at h-1)
 	)
+
+	controls, err := config.LoadControls("config/controls.json")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "load controls:", err)
+		return
+	}
 
 	dt := 1.0 / float64(fps)
 
@@ -144,12 +151,20 @@ func main() {
 				if !ok {
 					return
 				}
-				switch k {
-				case 'q', 'Q':
+
+				// Compare against config (case-insensitive by normalizing to upper).
+				kU := string([]byte{byte(k)})
+				if k >= 'a' && k <= 'z' {
+					kU = string([]byte{byte(k - 32)})
+				}
+
+				if kU == controls.Quit {
 					_ = r.ShowCursor()
 					return
+				}
 
-				// Serve start: P1 uses 'S', P2 uses 'K'
+				// Serve start: P1 uses 'S', P2 uses 'K' (still hardcoded)
+				switch k {
 				case 's', 'S':
 					if waitingServe {
 						serveToLeft = true
@@ -162,27 +177,30 @@ func main() {
 						bx, by, vx, vy = resetServe(w, groundBallY, serveToLeft)
 						waitingServe = false
 					}
+				}
 
-				// Player 1: A/D move, W jump
-				case 'a', 'A':
+				// Player 1
+				if kU == controls.Player1.Left {
 					p1LeftHeld = true
 					p1RightHeld = false
-				case 'd', 'D':
+				} else if kU == controls.Player1.Right {
 					p1RightHeld = true
 					p1LeftHeld = false
-				case 'w', 'W':
+				} else if kU == controls.Player1.Jump {
 					p1JumpReq = true
+				}
 
-				// Player 2: J/L move, I jump
-				case 'j', 'J':
+				// Player 2
+				if kU == controls.Player2.Left {
 					p2LeftHeld = true
 					p2RightHeld = false
-				case 'l', 'L':
+				} else if kU == controls.Player2.Right {
 					p2RightHeld = true
 					p2LeftHeld = false
-				case 'i', 'I':
+				} else if kU == controls.Player2.Jump {
 					p2JumpReq = true
 				}
+
 			default:
 				goto keysDone
 			}

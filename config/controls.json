@@ -1,0 +1,13 @@
+{
+  "quit": "q",
+  "player1": {
+    "left": "a",
+    "right": "d",
+    "jump": "w"
+  },
+  "player2": {
+    "left": "j",
+    "right": "l",
+    "jump": "i"
+  }
+}

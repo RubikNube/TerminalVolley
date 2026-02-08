@@ -12,6 +12,8 @@ Volley**.
 
 ## Controls (current defaults)
 
+Configured in `config/controls.json`:
+
 - Player 1 (left): `A/D` move, `W` jump
 - Player 2 (right): `J/L` move, `I` jump
 - Quit: `Q`
@@ -27,10 +29,9 @@ Volley**.
 - [x] Basic terminal renderer (grid-based)
 - [x] Simple game loop (~30 FPS)
 - [x] Player movement + jumping (keyboard)
-- [ ] Ball physics + collisions (ground/walls/net/players)
-- [ ] Scoring + round reset/serve
-- [ ] Simple UI (scoreboard)
-- [ ] Cross-platform input (macOS/Windows)
+- [x] Ball physics + collisions (ground/walls/net/players)
+- [x] Scoring + round reset/serve
+- [x] Simple UI (scoreboard)
 
 ## Development
 
