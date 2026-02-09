@@ -3,6 +3,8 @@
 A simple volleyball game playable in the terminal, inspired by **Blobby
 Volley**.
 
+![TerminalVolley Gameplay](./gameplay.gif)
+
 ## Goals
 
 - Real-time 2-player gameplay in a terminal window
