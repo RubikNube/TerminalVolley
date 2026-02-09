@@ -315,7 +315,7 @@ func (g *Game) Step() {
 	g.hitPlayer(p2cx, p2cy, g.p2vx)
 
 	// ground/scoring
-	if g.by >= g.groundBallY-g.ballR {
+	if g.by >= g.groundBallY {
 		if g.bx < float64(g.netX) {
 			g.p2Score++
 			g.waitingServe = true

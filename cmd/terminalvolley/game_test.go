@@ -55,7 +55,7 @@ func TestGame_Scoring_LeftSideAwardsP2AndResetsToWaitingServe(t *testing.T) {
 
 	// force ball to "hit ground" on left side
 	g.bx = float64(g.netX) - 10
-	g.by = g.groundBallY - g.ballR + 0.001
+	g.by = g.groundBallY + 0.001
 	g.vx, g.vy = 0, 0
 
 	g.Step()
@@ -89,7 +89,7 @@ func TestGame_Scoring_RightSideAwardsP1AndResetsToWaitingServe(t *testing.T) {
 
 	// force ball to "hit ground" on right side
 	g.bx = float64(g.netX) + 10
-	g.by = g.groundBallY - g.ballR + 0.001
+	g.by = g.groundBallY + 0.001
 	g.vx, g.vy = 0, 0
 
 	g.Step()
