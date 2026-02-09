@@ -14,13 +14,17 @@ type PlayerControls struct {
 }
 
 type Controls struct {
-	Quit    string         `json:"quit"`
-	Player1 PlayerControls `json:"player1"`
-	Player2 PlayerControls `json:"player2"`
+	Quit       string         `json:"quit"`
+	ServeLeft  string         `json:"serveLeft"`
+	ServeRight string         `json:"serveRight"`
+	Player1    PlayerControls `json:"player1"`
+	Player2    PlayerControls `json:"player2"`
 }
 
 func (c *Controls) Normalize() {
 	c.Quit = strings.ToUpper(c.Quit)
+	c.ServeLeft = strings.ToUpper(c.ServeLeft)
+	c.ServeRight = strings.ToUpper(c.ServeRight)
 	c.Player1.Left = strings.ToUpper(c.Player1.Left)
 	c.Player1.Right = strings.ToUpper(c.Player1.Right)
 	c.Player1.Jump = strings.ToUpper(c.Player1.Jump)

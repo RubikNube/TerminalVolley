@@ -18,6 +18,7 @@ Configured in `config/controls.json`:
 
 - Player 1 (left): `A/D` move, `W` jump
 - Player 2 (right): `J/L` move, `I` jump
+- Serve: `S` serve left, `K` serve right
 - Quit: `Q`
 
 ## Tech
@@ -40,14 +41,14 @@ Configured in `config/controls.json`:
 ### Run
 
 ```bash
-go run ./cmd/terminalvolley/main.go
+go run ./cmd/terminalvolley
 ```
 
 ### Build
 
 ```bash
-go build -o terminalvolley ./cmd/terminalvolley
-./terminalvolley
+./build.sh
+./bin/terminalvolley
 ```
 
 ## Notes

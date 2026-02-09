@@ -1,5 +1,7 @@
 {
   "quit": "q",
+  "serveLeft": "s",
+  "serveRight": "k",
   "player1": {
     "left": "a",
     "right": "d",

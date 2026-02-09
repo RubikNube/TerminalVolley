@@ -1,3 +1,4 @@
+// Package input handles keyboard input for the game.
 package input
 
 import (
