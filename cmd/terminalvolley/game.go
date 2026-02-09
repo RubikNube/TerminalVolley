@@ -159,6 +159,35 @@ func toUpper(b byte) byte {
 	return b
 }
 
+func (g *Game) hitPlayer(cx, cy, pvx float64) {
+	dx := g.bx - cx
+	dy := g.by - cy
+	d2 := dx*dx + dy*dy
+	rr := (g.blobR + g.ballR) * (g.blobR + g.ballR)
+	if d2 <= rr && d2 > 0.0001 {
+		d := math.Sqrt(d2)
+		nx, ny := dx/d, dy/d
+
+		penetration := (g.blobR + g.ballR) - d
+		g.bx += nx * penetration
+		g.by += ny * penetration
+
+		dot := g.vx*nx + g.vy*ny
+		if dot < 0 {
+			g.vx = g.vx - 2*dot*nx
+			g.vy = g.vy - 2*dot*ny
+		}
+
+		g.vx += nx * g.playerKick
+		g.vy += ny * g.playerKick
+
+		g.vx += pvx * g.playerCarry
+
+		g.vx *= 0.98
+		g.vy *= 0.98
+	}
+}
+
 func (g *Game) Step() {
 	dt := g.dt
 
@@ -282,37 +311,8 @@ func (g *Game) Step() {
 	p1cx, p1cy := g.p1x, g.p1y-0.5
 	p2cx, p2cy := g.p2x, g.p2y-0.5
 
-	hitPlayer := func(cx, cy, pvx float64) {
-		dx := g.bx - cx
-		dy := g.by - cy
-		d2 := dx*dx + dy*dy
-		rr := (g.blobR + g.ballR) * (g.blobR + g.ballR)
-		if d2 <= rr && d2 > 0.0001 {
-			d := math.Sqrt(d2)
-			nx, ny := dx/d, dy/d
-
-			penetration := (g.blobR + g.ballR) - d
-			g.bx += nx * penetration
-			g.by += ny * penetration
-
-			dot := g.vx*nx + g.vy*ny
-			if dot < 0 {
-				g.vx = g.vx - 2*dot*nx
-				g.vy = g.vy - 2*dot*ny
-			}
-
-			g.vx += nx * g.playerKick
-			g.vy += ny * g.playerKick
-
-			g.vx += pvx * g.playerCarry
-
-			g.vx *= 0.98
-			g.vy *= 0.98
-		}
-	}
-
-	hitPlayer(p1cx, p1cy, g.p1vx)
-	hitPlayer(p2cx, p2cy, g.p2vx)
+	g.hitPlayer(p1cx, p1cy, g.p1vx)
+	g.hitPlayer(p2cx, p2cy, g.p2vx)
 
 	// ground/scoring
 	if g.by >= g.groundBallY-g.ballR {
