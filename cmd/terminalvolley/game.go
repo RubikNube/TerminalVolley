@@ -65,8 +65,8 @@ func NewGame(w, h int, fps int, c Controls) *Game {
 		H:  h,
 		dt: 1.0 / float64(fps),
 
-		moveSpd:    20.0,
-		airMoveSpd: 12.0,
+		moveSpd:    28.0,
+		airMoveSpd: 16.8,
 		jumpVel:    -28.0,
 		grav:       32.0,
 
